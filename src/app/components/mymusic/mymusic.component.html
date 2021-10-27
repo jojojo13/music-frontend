@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="title">
+    <h2>Musics For You</h2>
+  </div>
+  <div class="ele">
+    <div class="content" *ngFor="let song of myFavoriteSongs">
+      <div class="imgBox">
+        <div class="overlay">
+          <app-options
+            [data]="song"
+          ></app-options>
+        </div>
+        <img [src]="song.img" alt="" />
+      </div>
+      <h2>{{ song.name }}</h2>
+      <p>{{ song.singer }}</p>
+    </div>
+  </div>
+</div>

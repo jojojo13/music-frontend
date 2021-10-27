@@ -1,0 +1,106 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.song {
+  width: 100%;
+  display: flex;
+  height: 80px;
+  align-items: center;
+  position: relative;
+  border-bottom: 1px solid RGBA(131, 143, 153, 0.33);
+}
+.imgBox {
+  margin-right: 20px;
+  height: 68%;
+  width: 60px;
+  position: relative;
+}
+.imgBox:hover img {
+  background-color: rgb(20, 20, 20);
+  opacity: 0.7;
+}
+.imgBox:hover .overlay {
+  visibility: visible;
+  opacity: 1;
+}
+.overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  visibility: hidden;
+  z-index: 3;
+}
+.song img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+}
+.rank {
+  margin-right: 80px;
+  margin-top: 10px;
+  width: 40px;
+}
+
+.effect {
+  text-align: center;
+  font-family: sans-serif;
+  font-weight: bolder;
+  font-size: 40px;
+  -webkit-text-stroke: 1px rgb(219, 216, 216);
+  -webkit-text-fill-color: transparent;
+}
+.song:nth-of-type(1) .effect {
+  -webkit-text-stroke: 1px rgb(50, 62, 238);
+}
+.song:nth-of-type(2) .effect {
+  -webkit-text-stroke: 1px rgb(43, 243, 126);
+}
+.song:nth-of-type(3) .effect {
+  -webkit-text-stroke: 1px rgb(250, 80, 50);
+}
+.song:hover {
+  background-color: rgba(156, 154, 154, 0.17);
+}
+i {
+  font-size: 12px;
+  position: absolute;
+  top: 40%;
+  left: 7%;
+  opacity: 0.7;
+}
+.description h4 {
+  margin-bottom: 5px;
+}
+.description p {
+  opacity: 0.6;
+}
+.action {
+  margin-left: auto;
+  margin-right: 30px;
+}
+/* .image {
+  position: relative;
+ 
+} */
+/* .animation{
+    position: absolute;
+    top:0;
+    left: 0;
+    border-radius: 50%;
+    
+    animation-name: moveToList;
+    animation-duration:4000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+img .animation{
+    width: 100px;
+    height: 100px;
+} */
+
+
+

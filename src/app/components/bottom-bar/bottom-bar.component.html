@@ -1,0 +1,36 @@
+<div class="bottombar">
+    <div class="left">
+        <div class="cd ">          
+        </div>
+        <div class="content">
+            <p>{{song.name}}</p>
+            <small>{{song.singer}}</small>
+
+        </div>
+        <div class="action">
+            <app-add-fav-song [data]="song"></app-add-fav-song>
+            <!-- <i class="fas fa-heart" (click)="addFavorite()" [ngStyle]="{'color':song.isLiked==true?'red':'white'}"></i> -->
+            <i class="fas fa-ellipsis-h"></i>
+        </div>
+
+    </div>
+    <div class="center">
+        <div class="button">
+            <i class="fas fa-random"></i>
+            <i class="fas fa-step-backward preBtn"></i>
+            <i class="fas fa-play circle-icon playBtn" ></i>
+            <i class="fas fa-step-forward nextBtn"></i>
+            <i class="fas fa-repeat"></i>
+        </div>
+        <audio src=""></audio>
+        <div class="duration">
+            <span>{{time|timeSong}}</span>
+            <input id="progress" class="progress" type="range" value="0" step="1" min="0" max="100">
+            <span>{{durationSong|timeSong}}</span>
+        </div>
+             
+    </div>
+    <div class="right">
+        <i class="fas fa-music musicList"></i>
+    </div>
+</div>

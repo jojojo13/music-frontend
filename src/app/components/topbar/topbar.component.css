@@ -1,0 +1,58 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.circle-icon {
+    background-color: rgba(207, 207, 207, 0.4);
+    padding:12px;
+    border-radius: 50%;
+}
+.setting i,div{
+    margin: 0 10px;
+    cursor: pointer;
+}
+.topbar{
+    background-color: rgb(18, 12, 28);
+    display: flex;
+    align-items: center;
+    position: fixed;
+    height: 80px;
+    width: calc(100vw - 250px)!important;
+    color: rgb(255, 255, 255);
+    margin-left: 250px;
+    z-index: 100;
+}
+.center input{
+    padding: 12px 50px;
+    border-radius: 20px;
+    background-color: rgba(150, 150, 150, 0.1);
+    color: #fff;
+    outline:none;
+    border:none;
+    width: 400px;
+    margin-left: 200px;
+    font-family: Cambria, Cochin, Georgia, serif;
+    font-size: 16px;   
+    background-position:10px 8px;
+    background-image: url('http://www.kirupa.com/images/search.png');
+    background-repeat: no-repeat;
+    background-size: 30px; 
+}
+.center input:focus{
+    outline: none;
+    box-shadow: 0px 0px 3px #dcdcdd;   
+}
+.setting{
+    display: flex;
+    position: relative;
+    margin-right: 30px;
+    margin-left: auto;
+}
+
+.myself{
+    border-radius: 50%;
+    background-color: rgba(207, 207, 207, 0.4);
+    width: 40px; 
+}

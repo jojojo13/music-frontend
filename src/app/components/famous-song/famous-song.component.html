@@ -1,0 +1,10 @@
+<div class="famousSong">
+  <i class="fas fa-chevron-left slideLeft"></i>
+  <i class="fas fa-chevron-right slideRight"></i>
+  <div class="song" *ngFor="let song of famousSongs">
+    
+    <div class="imgBox">
+      <img [src]="song.img" alt="" />
+    </div>
+  </div>
+</div>

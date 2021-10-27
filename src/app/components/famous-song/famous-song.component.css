@@ -1,0 +1,61 @@
+.famousSong {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-bottom: 40px;
+  position: relative;
+}
+.song {
+  width: 30%;
+}
+.imgBox {
+  width: 100%;
+  height: 180px;
+}
+.imgBox img {
+  outline: none;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+}
+.slideLeft {
+  position: absolute;
+  font-size: 30px;
+  font-weight: lighter;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 2%;
+  background-color: rgba(248, 248, 248, 0.255);
+  padding: 16px 20px 16px 16px;
+  border-radius: 50%;
+  opacity: 0;
+  color: rgb(241, 239, 239);
+  cursor: pointer;
+}
+.slideRight {
+  position: absolute;
+  font-size: 30px;
+  font-weight: lighter;
+  top: 50%;
+  transform: translateY(-50%);
+  left: auto;
+  right: 2%;
+  cursor: pointer;
+  background-color: rgba(248, 248, 248, 0.255);
+  padding: 16px 16px 16px 20px;
+  border-radius: 50%;
+  opacity: 0;
+}
+.circle-icon {
+  border: 1px solid #fff;
+  padding: 12px 12px 12px 14px;
+  border-radius: 50%;
+  margin: 10px;
+}
+.famousSong:hover .slideLeft {
+  opacity: 1;
+}
+.famousSong:hover .slideRight {
+  opacity: 1;
+}

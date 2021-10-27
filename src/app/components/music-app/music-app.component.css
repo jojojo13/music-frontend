@@ -1,0 +1,8 @@
+.content{
+    margin-left: 250px;
+    padding: 100px 60px;
+    overflow: auto;
+    height:65vh;
+    scroll-behavior: smooth;
+    
+}

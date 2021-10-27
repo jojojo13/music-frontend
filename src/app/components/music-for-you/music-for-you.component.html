@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="title">
+    <h2>Musics For You</h2>
+  </div>
+  <div class="ele">
+    <div class="content" *ngFor="let song of songs; let i = index">
+      <div class="imgBox">
+        <div class="overlay">
+          <app-options
+            [data]="song"
+          ></app-options>
+        </div>   
+        
+        <img class="song" [src]="song.img" alt="" />
+        
+      </div>
+      <div class="animatation">
+        <img [src]="song.img" alt="" />
+      </div>
+      <h2>{{ song.name }}</h2>
+
+      <p>{{ song.singer }}</p>
+    </div>
+  </div>
+</div>

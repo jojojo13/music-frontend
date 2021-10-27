@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="main">
+    <div class="img">
+      <div class="imgBox">
+        <img
+          src="../../../assets/images/240883720_283544213189379_947413301666311073_n.png"
+          alt=""
+          width="240px"
+        />
+      </div>
+    </div>
+    <div class="form">
+      <h2>Member Login</h2>
+      <form
+        action=""
+        [formGroup]="loginForm"
+        (ngSubmit)="submitForm()"
+        novalidate
+      >
+        <div class="form-group">
+          <input type="text" class="form-control" formControlName="username" />
+          <small
+            *ngIf="Username?.errors?.required && Username?.touched"
+            style="color: red"
+            >User name is required</small
+          >
+        </div>
+        <div class="form-group">
+          <input
+            type="password"
+            class="form-control"
+            formControlName="password"
+          />
+          <small
+            *ngIf="Password?.errors?.required && Password?.touched"
+            style="color: red"
+            >Password is required</small
+          >
+        </div>
+        <button>LOGIN</button>
+        <small class="error" *ngIf="errorMessage">{{ errorMessage }}</small>
+      </form>
+      <p class="forgot">Forgot password</p>
+      <p class="signup"><a href="">Create Account </a></p>
+    </div>
+  </div>
+</div>

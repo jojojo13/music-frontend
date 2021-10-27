@@ -1,8 +1,8 @@
-#Introduction:
-### Clone zingmp3.vn
+# Introduction:
+This project clone zingmp3.vn.
 
 ## Features:
--Change Background
--Zingchart
--Add/remove favorite song
--History
+Change Background.
+Zingchart.
+Add/remove favorite song.
+History.

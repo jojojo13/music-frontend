@@ -1,7 +1,6 @@
 <div class="container">
-  <h1>Themes</h1>
   <div class="content">
-    <h3 class="title">Primary Color</h3>
+    <h3 class="title">Màu cơ bản</h3>
     <div class="list" >
       <div *ngFor="let item of darkColor" >
         <div class="color" (click)="choose(item)" [ngStyle]="{'background-color':item.value1}"></div>

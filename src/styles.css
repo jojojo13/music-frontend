@@ -1,27 +1,104 @@
 /* You can add global styles to this file, and also import other style files */
-*{
-    margin: 0;
-    padding: 0;
-    font-family: Arial, Helvetica, sans-serif;
-}
-body{
-    position: relative;
-    background-color:rgb(18, 12, 28) ;
-    color: #fff;
-    overflow: hidden;
-  
+* {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
 }
 
+body {
+  position: relative;
+  background-color: rgb(18, 12, 28);
+  color: #fff;
+  overflow: hidden;
+}
 
 /* .mat-dialog-container {
     background-color: rgb(37, 134, 179) ;
  } */
-html, body { height: 100vh;  }
+html,
+body {
+  height: 100vh;
+}
 
 ::-webkit-scrollbar {
-    width: 0;  /* Remove scrollbar space */
-    background: transparent;  /* Optional: just make scrollbar invisible */
+  width: 0; /* Remove scrollbar space */
+  background: transparent; /* Optional: just make scrollbar invisible */
 }
-.rightbar .go{
-    background-color: darkorange;
- }
+.rightbar .go {
+  background-color: darkorange;
+}
+
+.slick-arrow{
+  position: absolute;
+  top:50%;
+  transform: translateY(-50%);
+  padding:18px;
+  border-radius: 50%;
+  border: none;
+  background-color: rgba(240, 240, 240, 0.2);
+  cursor: pointer;
+  z-index: 2;
+}
+.slick-next {
+  right: 0;
+  padding-left: 24px;
+  padding-right: 22px;
+}
+.slick-prev{
+  left: 0;
+  padding-left: 22px;
+  padding-right: 24px;
+
+}
+.slick-arrow i{
+  font-size: 25px;
+  font-weight: lighter;
+  color:#fff;
+}
+.slick-arrow:hover i{
+  color: aquamarine
+}
+.slick-dots{
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%,100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+}
+/* .mat-dialog-container{
+background-color: red;
+} */
+
+.slick-dots button{
+  font-size: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 100rem;
+  border:none;
+  background-color: rgb(221, 221, 221);
+}
+.slick-dots .slick-active button{
+  background-color: aquamarine;
+}
+.slick-slide {
+  margin: 10px;
+}
+li::marker{
+  font-size: 0 !important;
+
+}
+.famousSong .slick-arrow{
+  visibility: hidden;
+}
+.famousSong:hover .slick-arrow{
+  visibility: visible;
+}
+/* custom dialog */
+
+.swal2-title{
+  color: #fff !important;
+}

@@ -1,7 +1,6 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { SongsServiceService } from 'src/app/service/songs-service.service';
 import { UserServiceService } from 'src/app/service/user-service.service';
-import { delay } from "rxjs/operators";
 export interface Song {
   _id: string;
   name: string;
@@ -13,6 +12,7 @@ export interface Song {
   dislikes: number;
   link: string;
   [key:string]:any
+
 }
 
 @Component({

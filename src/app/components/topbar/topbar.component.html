@@ -1,11 +1,25 @@
 <div class="topbar">
-    <div class="center">
-        <input type="text" placeholder="Input songs,artist or MV">
-    </div>
-    <div class="setting">
-        <i class="fas fa-tshirt circle-icon " (click)="changeColor()"></i>
-        <i class="fas fa-upload circle-icon "></i>
-        <i class="fas fa-cog circle-icon"></i>
-       <div class="myself"><img src="" class="" alt="" width=""> </div>
-    </div>
+  <div class="center">
+    <input type="text" placeholder="Input songs,artist or MV" />
+  </div>
+  <div class="username">
+    <h4 *ngIf="user">Chào, {{ user.username }}</h4>
+  </div>
+
+  <div class="setting">
+    <i class="fas fa-tshirt circle-icon" (click)="popUpDialog()"></i>
+    <!-- <i class="fas fa-upload circle-icon "></i>
+        <i class="fas fa-cog circle-icon"></i> -->
+    <i class="fas fa-sign-out-alt circle-icon" (click)="signOut()"></i>
+    <img [src]="img" class="" alt="" width="" />
+  </div>
+
 </div>
+  <!-- this is dialog to pick themes -->
+<swal #themePicker title="Chọn giao diện bạn mong muốn" width="480px" tabindex="100" background='rgb(18, 8, 34)'  >
+    <div *swalPortal="swalTargets.content">
+      <app-pop-up-change-bg-color
+        (colorPicker)="update($event)"
+      ></app-pop-up-change-bg-color>
+    </div>
+  </swal>

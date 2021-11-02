@@ -18,4 +18,8 @@ export class AuthorizeService {
   get isLoggedIn() {
     return this.isLogged.asObservable();
   }
+
+  createAccount(user:Object){
+    return this.http.post('http://localhost:3000/createAccount',user)
+  }
 }

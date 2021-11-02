@@ -1,0 +1,57 @@
+<div class="container">
+    <div class="main">
+      <div class="img">
+        <div class="imgBox">
+          <img
+            src="../../../assets/images/logo-dark.svg"
+            alt=""
+            
+          />
+        </div>
+      </div>
+      <div class="form">
+        <h3> Create Account</h3>
+        <form
+          action=""
+          [formGroup]="signUpForm"
+          (ngSubmit)="submitForm()"
+          novalidate
+        >
+          <div class="form-group">
+            <input type="text" class="form-control" formControlName="email" placeholder="Email" />
+            <small
+              *ngIf="Email?.errors?.required && Email?.touched"
+              class="error"
+              >User name is required</small
+            >
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" formControlName="username" placeholder="Username" />
+            <small
+              *ngIf="UserName?.errors?.required && UserName?.touched"
+              class="error"
+              >Name is required</small
+            >
+          </div>
+          <div class="form-group">
+            <input
+              type="password"
+              class="form-control"
+              formControlName="password"
+              placeholder="Password"
+            />
+            <small
+              *ngIf="Password?.errors?.required && Password?.touched "
+              class="error"
+              >Password is required</small
+            >
+          </div>
+          <button [disabled]="Password?.errors||UserName?.errors||Email?.errors" >Create </button>
+          <!-- <small class="error" *ngIf="errorMessage">{{ errorMessage }}</small> -->
+        </form>
+        <!-- <p class="forgot">Forgot password</p>
+        <p class="signup"><a href="">Create Account?</a></p> -->
+      </div>
+    </div>
+  </div>
+  

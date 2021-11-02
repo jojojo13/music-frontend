@@ -4,24 +4,18 @@
   box-sizing: border-box;
 }
 .rightbar {
-  width: 280px;
+  width: 260px;
   position: absolute;
   background-color: rgb(18, 8, 34);
   padding: 40px 0 120px 0;
-  z-index: 100;
+  z-index: 3;
   right: 0;
   height: 100vh;
   overflow: auto;
   scroll-behavior: smooth;
-  transform: translateX(280px);
+  transform: translateX(260px);
   transition-duration: 1s;
- 
 }
-
-
-/* .rightbar .active{
-    transform: translateX(-280) ;
-} */
 .content {
   margin-left: 10px;
 }
@@ -30,7 +24,7 @@ p {
   margin: 0;
 }
 h3 {
-  font-weight: 900;
+  font-weight: 700;
   font-size: larger;
 }
 p {
@@ -44,7 +38,7 @@ p {
   border-radius: 5px;
   padding: 10px;
 }
- .playing{
+.playing {
   background-color: rgba(241, 239, 239, 0.411);
 }
 .imgBox {
@@ -60,7 +54,6 @@ p {
 }
 .song:hover {
   background-color: rgba(241, 239, 239, 0.411);
- 
 }
 .imgBox:hover .playBtn {
   visibility: visible;
@@ -68,7 +61,6 @@ p {
 }
 .imgBox:hover .animate {
   visibility: hidden;
- 
 }
 .overlay {
   position: absolute;
@@ -77,11 +69,11 @@ p {
   transform: translate(-50%, -50%);
   z-index: 3;
 }
-.playBtn{
+.playBtn {
   visibility: hidden;
 }
 
-.animate {
+.barAnimate {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -92,9 +84,8 @@ p {
   justify-content: space-between;
   width: 2em;
   visibility: hidden;
-
 }
- .active{
+.active {
   visibility: visible;
 }
 
@@ -106,6 +97,7 @@ span {
 
 span:nth-of-type(1) {
   animation: grow 1s -0.45s ease-in-out infinite;
+
 }
 
 span:nth-of-type(2) {
@@ -130,4 +122,3 @@ span:nth-of-type(4) {
     transform: scaleY(2);
   }
 }
-

@@ -10,18 +10,17 @@ p {
 .bottombar {
   position: absolute;
   height: 110px;
-  width: 600px;
   bottom: 0;
   display: flex;
-  padding: 15px;
+  padding: 10px;
   width: 100%;
-  z-index: 10000;
+  z-index: 4;
   background-color: rgb(23, 15, 35);
 }
 .left {
   display: flex;
   align-items: center;
-  width: 25%;
+  min-width: 295px;
 }
 .right {
   display: flex;
@@ -42,7 +41,6 @@ p {
   animation-iteration-count: infinite;
   animation-timing-function: linear;
   animation-play-state: paused;
-
 }
 /* .cd.playing {
   animation-name: spin;
@@ -50,11 +48,10 @@ p {
   animation-iteration-count: infinite;
   animation-timing-function: linear;
 } */
-.action{
+.action {
   display: flex;
 }
 .action i {
- 
   margin-top: 10px;
 }
 .fa-heart:hover {
@@ -85,14 +82,25 @@ p {
   align-items: center;
   flex-direction: column;
 }
-i {
+.button{
+  position: relative;
+}
+.button i {
   font-size: 16px;
-  margin: 0 20px 20px;
+  margin: 10px 20px 10px 10px;
 }
 .circle-icon {
   border: 1px solid #fff;
   padding: 12px 12px 12px 14px;
   border-radius: 50%;
+}
+.pauseBtn{
+  padding: 12px 12px 12px 14px;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  position: absolute;
+  left: 90px;
+  visibility: hidden;
 }
 .progress {
   width: 60%;
@@ -125,5 +133,18 @@ span {
   }
   100% {
     opacity: 1;
+  }
+}
+@media screen and (max-width: 768px) {
+  .bottombar{
+    height: 90px;
+  }
+  .cd {
+    margin-right: 40px;
+    width: 75px;
+    height: 75px;
+  }
+  .button i{
+    font-size: 12px;
   }
 }

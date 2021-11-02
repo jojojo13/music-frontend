@@ -3,14 +3,14 @@
     <div class="img">
       <div class="imgBox">
         <img
-          src="../../../assets/images/240883720_283544213189379_947413301666311073_n.png"
+          src="../../../assets/images/logo-dark.svg"
           alt=""
-          width="240px"
+          
         />
       </div>
     </div>
     <div class="form">
-      <h2>Member Login</h2>
+      <h3> Login</h3>
       <form
         action=""
         [formGroup]="loginForm"
@@ -18,10 +18,10 @@
         novalidate
       >
         <div class="form-group">
-          <input type="text" class="form-control" formControlName="username" />
+          <input type="text" class="form-control" formControlName="username" placeholder="Username" />
           <small
             *ngIf="Username?.errors?.required && Username?.touched"
-            style="color: red"
+            class="error"
             >User name is required</small
           >
         </div>
@@ -30,10 +30,11 @@
             type="password"
             class="form-control"
             formControlName="password"
+            placeholder="Password"
           />
           <small
             *ngIf="Password?.errors?.required && Password?.touched"
-            style="color: red"
+            class="error"
             >Password is required</small
           >
         </div>
@@ -41,7 +42,7 @@
         <small class="error" *ngIf="errorMessage">{{ errorMessage }}</small>
       </form>
       <p class="forgot">Forgot password</p>
-      <p class="signup"><a href="">Create Account </a></p>
+      <p class="signup"><a routerLink='/signup'>Create Account?</a></p>
     </div>
   </div>
 </div>

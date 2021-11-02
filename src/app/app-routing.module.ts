@@ -5,6 +5,7 @@ import { ContentComponent } from './components/content/content.component';
 import { LoginComponent } from './components/login/login.component';
 import { MusicAppComponent } from './components/music-app/music-app.component';
 import { MymusicComponent } from './components/mymusic/mymusic.component';
+import { SignupComponent } from './components/signup/signup.component';
 import { GuardGuard } from './service/guard.guard';
 
 const routes: Routes = [
@@ -14,6 +15,7 @@ const routes: Routes = [
     {path:'music-chart',component:ChartComponent}
   ]},
   {path:'login',component:LoginComponent},
+  {path:'signup',component:SignupComponent}
  
 ];
 

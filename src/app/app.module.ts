@@ -11,7 +11,6 @@ import { RecentlySongsComponent } from './components/recently-songs/recently-son
 import { ContentComponent } from './components/content/content.component';
 import { MusicForYouComponent } from './components/music-for-you/music-for-you.component';
 import {MatDialogModule,MatDialogRef,MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { PopUpChangeBgColorComponent } from './components/pop-up-change-bg-color/pop-up-change-bg-color.component';
 import { BottomBarComponent } from './components/bottom-bar/bottom-bar.component';
 import { OptionsComponent } from './components/options/options.component';
@@ -26,6 +25,10 @@ import { MoreComponent } from './components/actions/more/more.component';
 import { ChartComponent } from './components/chart/chart.component';
 import { RightbarComponent } from './components/rightbar/rightbar.component';
 import { FamousSongComponent } from './components/famous-song/famous-song.component';
+import { SignupComponent } from './components/signup/signup.component';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations'
+import { SweetAlert2Module } from "@sweetalert2/ngx-sweetalert2";
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,21 +50,25 @@ import { FamousSongComponent } from './components/famous-song/famous-song.compon
     MoreComponent,
     ChartComponent,
     RightbarComponent,
-    FamousSongComponent
+    FamousSongComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     MatDialogModule,
+    ReactiveFormsModule,
+    SlickCarouselModule,
     NoopAnimationsModule,
-    ReactiveFormsModule
+    SweetAlert2Module.forRoot()
   ],
   providers: [  {
     provide: MatDialogRef,
     useValue: {}
   },   { provide: MAT_DIALOG_DATA, useValue: {} },
-  GuardGuard
+  GuardGuard,
+
 ],
   bootstrap: [AppComponent]
 })

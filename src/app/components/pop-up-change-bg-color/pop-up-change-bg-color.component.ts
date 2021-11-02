@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 
-export interface color {
+export interface Color {
   name: string;
-  value: string;
+  value1: string,
+  value2:string,
+  value3:string,
 }
 @Component({
   selector: 'app-pop-up-change-bg-color',
@@ -11,6 +13,7 @@ export interface color {
   styleUrls: ['./pop-up-change-bg-color.component.css'],
 })
 export class PopUpChangeBgColorComponent implements OnInit {
+  @Output() colorPicker:EventEmitter<Color> =new EventEmitter<Color>();
   darkColorsValue = [
     ,
     '#220945',
@@ -56,10 +59,10 @@ export class PopUpChangeBgColorComponent implements OnInit {
 
   ];
   colorChoosed: any;
-  constructor(public dialogRef: MatDialogRef<PopUpChangeBgColorComponent>) {}
+  constructor(public dialogRef: MatDialogRef<PopUpChangeBgColorComponent>, private elementRef: ElementRef,) {}
 
   ngOnInit(): void {}
   choose(color: any) {  
-    this.dialogRef.close(color);
+    this.colorPicker.emit(color)
   }
 }

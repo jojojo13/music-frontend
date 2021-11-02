@@ -7,10 +7,10 @@ import { Song } from '../../music-for-you/music-for-you.component';
 @Component({
   selector: 'app-add-fav-song',
   templateUrl: './add-fav-song.component.html',
-  styleUrls: ['./add-fav-song.component.css']
+  styleUrls: ['./add-fav-song.component.css'],
 })
 export class AddFavSongComponent implements OnInit {
-  @Input('data') song:Song = {
+  @Input('data') song: Song = {
     _id: '',
     name: '',
     singer: '',
@@ -20,26 +20,29 @@ export class AddFavSongComponent implements OnInit {
     likes: 0,
     dislikes: 0,
     link: '',
-    isLiked:true
+    isLiked: true,
   };
-  constructor(private userService:UserServiceService,private auth:AuthorizeService) {}
+  constructor(
+    private userService: UserServiceService,
+    private auth: AuthorizeService
+  ) {}
 
-  ngOnInit(): void {
-    
+  ngOnInit(): void {}
+   addFavorite() {
+     //  if user logged in
+    if (this.auth.token != null) {
+      // add favor song
+       this.userService.addUserFavoriteSongs(this.song._id).toPromise().then(async()=>{
+         //get user favorite song
+        const favorSong=await this.userService.getFavSongsOfUser().toPromise()
+        // pass  to userFavoriteSongChange to component [mymusic] subcribe
+        this.userService.userFavoriteSongChange.next(favorSong)
+       })
+  
+      this.song.isLiked = !this.song.isLiked;
+      // popup login if not logged
+    } else {
+      window.open('/login', 'Popup', 'width=600,height=600');
+    }
   }
-  addFavorite() {
- if(this.auth.token!=null){
-  this.userService.addUserFavoriteSongs(this.song._id).subscribe((data:any) =>{
-    this.userService.getFavSongsOfUser().subscribe((songs:Song[]) =>{
-      this.userService.userFavoriteSongChange.next(songs)
-    })
-  })
-  this.song.isLiked=!this.song.isLiked
- }else{
-  window.open('/login',"Popup", "width=600,height=600")
- }
-    
-   
-  }
-
 }

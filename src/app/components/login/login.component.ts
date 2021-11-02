@@ -31,9 +31,8 @@ export class LoginComponent implements OnInit {
     this.auth.login(user).subscribe(
       (data: any) => {
         localStorage.setItem('token', data.token);
-        console.log('zo day ne')
         if(window.opener){
-    
+          this.auth.isLogged.next(true)
           window.opener.document.location.href  =  window.opener.document.location.href
         } 
         window.close()

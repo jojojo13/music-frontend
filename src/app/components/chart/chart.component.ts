@@ -15,21 +15,16 @@ export class ChartComponent implements OnInit {
 
   ngOnInit(): void {
     
-    setTimeout(() => {
-      this.auth.isLogged.subscribe(isLogged=>{
-        console.log(isLogged)
-      })
-     
-      this.songService.getTopViewsSong().subscribe((topSongs:Song[])=>{
-        this.topSongs=topSongs
-       
+        this.songService.getTopViewsSong().subscribe(async (topSongs:Song[])=>{
+        this.topSongs=await topSongs
+      
         this.userService.userFavoriteSongChange.pipe().subscribe((favSongs:Song[]) => { 
           let indexOfCommon = this.userService.findIndexCommon(topSongs, favSongs);    
           this.userService.addIsLikedKeyToSong(indexOfCommon,topSongs)   
         });
        })
-    }, 800);
+    }
     
   }
 
-}
+

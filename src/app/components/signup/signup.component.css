@@ -1,0 +1,89 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  .container {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background: rgb(57, 38, 200);
+    background: linear-gradient(
+      90deg,
+      rgba(57, 38, 200, 1) 0%,
+      rgb(49, 5, 68) 57%
+    );
+  }
+  
+  .imgBox img {
+    object-fit: cover;
+  }
+  .form {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .main {
+    width: 55%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+   
+  }
+  h3 {
+    font-weight: bolder;
+    margin-bottom: 30px;
+    color: rgba(227, 233, 231, 0.911);
+  }
+  input {
+    padding: 10px;
+    margin: 20px auto;
+    border-radius: 10px;
+  
+    border: 0;
+    display: block;
+    width: 80%;
+    background-color: rgb(165, 226, 250);
+  }
+  button {
+    color: #fff;
+    background-color: rgb(133, 180, 85);
+    display: block;
+    width: 80%;
+    padding: 10px;
+    margin: 20px auto;
+    border-radius: 10px;
+    border: 0;
+    cursor: pointer;
+   
+  }
+  button[disabled]{
+    cursor: not-allowed;
+    background-color: #cccccc;
+    color: #666666;
+  }
+  
+  .signup a {
+    text-align: center;
+    color: rgb(218, 214, 214);
+  }
+  .forgot {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+  .error{
+    font-size: 14px;
+    color: rgb(207, 7, 7);
+    font-weight: 900;
+    
+  }
+  
+  @media screen and (min-width:768px) {
+    .main{
+     max-width: 360px;
+    }
+  }
+  

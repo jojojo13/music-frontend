@@ -1,4 +1,10 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 
 import { SongsServiceService } from 'src/app/service/songs-service.service';
 import { UserServiceService } from 'src/app/service/user-service.service';
@@ -9,8 +15,7 @@ import { Song } from '../music-for-you/music-for-you.component';
   templateUrl: './bottom-bar.component.html',
   styleUrls: ['./bottom-bar.component.css'],
 })
-
-export class BottomBarComponent implements OnInit, AfterViewInit,OnDestroy {
+export class BottomBarComponent implements OnInit, AfterViewInit, OnDestroy {
   song: Song = {
     _id: '',
     name: '',
@@ -29,14 +34,15 @@ export class BottomBarComponent implements OnInit, AfterViewInit,OnDestroy {
   constructor(
     private elementRef: ElementRef,
     private songservice: SongsServiceService,
-    private userService:UserServiceService
+    private userService: UserServiceService
   ) {}
-  ngOnDestroy(): void {
-  
-  }
+  ngOnDestroy(): void {}
 
-  ngOnInit(): void {
+  async ngOnInit() {
     let index = 0;
+    //get token
+    const token=localStorage.getItem('token')
+    
     //get audio
     const audio: HTMLAudioElement =
       this.elementRef.nativeElement.ownerDocument.querySelector('audio');
@@ -47,63 +53,105 @@ export class BottomBarComponent implements OnInit, AfterViewInit,OnDestroy {
     //get progress bar
     const progressBar: HTMLProgressElement =
       this.elementRef.nativeElement.ownerDocument.querySelector('.progress');
+    //get cd to make animate
+    const disk: HTMLElement =
+      this.elementRef.nativeElement.ownerDocument.querySelector('.cd');
+    //get bar animate
+    const barAnimate: HTMLElement =
+      this.elementRef.nativeElement.ownerDocument.querySelector(
+        '.barAnimate .active'
+      );
     // get play btn
     const playBtn: HTMLAudioElement =
       this.elementRef.nativeElement.ownerDocument.querySelector('.playBtn');
-    //get cd
-    const disk: HTMLElement =
-      this.elementRef.nativeElement.ownerDocument.querySelector('.cd');
+    //get nextBtn
     const nextBtn: HTMLElement =
       this.elementRef.nativeElement.ownerDocument.querySelector('.nextBtn');
+    //get previousBtn
     const preBtn: HTMLElement =
       this.elementRef.nativeElement.ownerDocument.querySelector('.preBtn');
-
-    //playlist
+    //get pauseBtn
+    const pauseBtn: HTMLElement =
+      this.elementRef.nativeElement.ownerDocument.querySelector('.pauseBtn');
+    let unfinishedSong: any;
+    //load unfinished song of user in last access website
+    if (token) {
+     
+      unfinishedSong = await this.userService
+        .getUnfinishedSongOfUser()
+        .toPromise();
+    }
 
     const music = {
-      init: () => {  
-        this.songservice.currentSongChange.subscribe((currentSong: Song) => {
-          if (currentSong) {
-            this.isPlaying = true;
-            this.song = currentSong;
-            disk.style.backgroundImage = `url('${currentSong.img}')`;
-            audio.src = currentSong.link;
-            audio.play();
+      init: () => {
+        // currentSong= unfinishedSong
+        if (unfinishedSong) {
+        
+            this.songservice.currentSongChange.next(unfinishedSong);
+          
+        }
+        this.songservice.currentSongChange.subscribe(
+          (currentSongPlay: Song) => {
+            if (currentSongPlay) {
+              //bind to html
+              this.song = currentSongPlay;
+              disk.style.backgroundImage = `url('${currentSongPlay.img}')`;
+              audio.src = currentSongPlay.link;
+
+              if (!currentSongPlay.hasOwnProperty('timePaused')) {
+                audio.currentTime = 0;
+                audio.play();
+              } else {
+                audio.currentTime = currentSongPlay.timePaused;
+              }
+            }
           }
-        });
+        );
       },
 
       handleEvents: () => {
         //pause or play audio
         playBtn.onclick = () => {
-          if (this.isPlaying) {
-            audio.pause();
-          } else {
+        
             audio.play();
-          }
+          
         };
-
+        pauseBtn.onclick=()=>{
+          audio.pause()
+        }
         //play animation when audio play
         audio.onplay = () => {
           this.isPlaying = true;
           disk.style.animationPlayState = 'running';
+          pauseBtn.style.visibility='visible'
+          playBtn.style.visibility='hidden'
         };
-
         //paused animation when audio paused
         audio.onpause = () => {
           this.isPlaying = false;
           disk.style.animationPlayState = 'paused';
+          playBtn.style.visibility='visible'
+          pauseBtn.style.visibility='hidden'
+          //assign timePaused  to object this.song
+          this.song.timePaused =Math.round(audio.currentTime) ;
+          //post to server
+          if(token){
+            this.userService.postUnfinishedSong(this.song).toPromise();
+          }
+         
         };
 
         //update duration song
         audio.onloadeddata = () => {
           this.durationSong = audio.duration;
+          const value = Math.round((this.time / this.durationSong) * 100);
+          progressBar.value = value;
         };
 
         //update progressbar on time
         audio.ontimeupdate = () => {
           this.time = audio.currentTime;
-          const value = (this.time / this.durationSong) * 100;
+          const value = Math.round((this.time / this.durationSong) * 100);
           progressBar.value = value;
         };
 
@@ -123,7 +171,7 @@ export class BottomBarComponent implements OnInit, AfterViewInit,OnDestroy {
             rightbar.style.transform = 'translateX(280px)';
           }
         };
-
+        //next song in history
         nextBtn.onclick = () => {
           if (index == this.userService.historySongArr.length - 1) {
             index = 0;
@@ -132,6 +180,7 @@ export class BottomBarComponent implements OnInit, AfterViewInit,OnDestroy {
           }
           music.loadCurrentSong();
         };
+        //previous song in history
         preBtn.onclick = () => {
           if (index == 0) {
             index = this.userService.historySongArr.length - 1;
@@ -140,6 +189,22 @@ export class BottomBarComponent implements OnInit, AfterViewInit,OnDestroy {
           }
           music.loadCurrentSong();
         };
+
+        // post current song to server if song not completed before window closed
+        if (token) {
+          window.onbeforeunload = (event) => {
+            // if close widow when audio playing
+            if (this.isPlaying == true) {
+              //assign timePaused  to object this.song
+              this.song.timePaused =Math.round(audio.currentTime) ;
+              //post to server
+              this.userService.postUnfinishedSong(this.song).toPromise();
+              //confirm dialog to close or not
+              event.returnValue = true;
+            }
+            return;
+          };
+        }
       },
       loadCurrentSong: () => {
         let listSong = this.userService.historySongArr;
@@ -166,5 +231,10 @@ export class BottomBarComponent implements OnInit, AfterViewInit,OnDestroy {
     };
     music.start();
   }
+  // processFavSong(){
+  //   this.userService.getFavSongsOfUser().subscribe(favoriteSongs=>{
+  //     this.songservice.
+  //   })
+  // }
   ngAfterViewInit(): void {}
 }

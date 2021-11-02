@@ -1,46 +1,62 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
+import { AuthorizeService } from 'src/app/service/authorize.service';
+import { UserServiceService } from 'src/app/service/user-service.service';
+import { SwalPortalTargets } from '@sweetalert2/ngx-sweetalert2';
 import {
-  MatDialog,
-} from '@angular/material/dialog';
-import { PopUpChangeBgColorComponent } from '../pop-up-change-bg-color/pop-up-change-bg-color.component';
-
+  Color,
+  PopUpChangeBgColorComponent,
+} from '../pop-up-change-bg-color/pop-up-change-bg-color.component';
+export interface User {
+  username: '';
+  email: '';
+  img: '';
+}
 @Component({
   selector: 'app-topbar',
   templateUrl: './topbar.component.html',
   styleUrls: ['./topbar.component.css'],
 })
 export class TopbarComponent implements OnInit {
-  constructor(private elementRef: ElementRef, private dialogRef: MatDialog) {}
+  @ViewChild('themePicker') themePicker!: SwalComponent;
+  constructor(
+    private elementRef: ElementRef,
+    private dialogRef: MatDialog,
+    private userService: UserServiceService,
+    private auth: AuthorizeService,
+    public readonly swalTargets: SwalPortalTargets
+  ) {}
 
-  ngOnInit(): void {
-    
+  user!: User;
+  img = '../../../assets/images/defaultAvatar.jpg';
+  async ngOnInit() {
+    if (this.auth.token) {
+      this.user = await this.userService.getUser().toPromise();
+      this.img = this.user.img == '' ? this.img : this.user.img;
+    }
   }
-
-  changeColor() {
-    const data = this.dialogRef.open(PopUpChangeBgColorComponent, {
-      width: '750px',
-    });
-    const dialog = this.elementRef.nativeElement.ownerDocument.querySelector(
-      '.mat-dialog-container'
-    );
+  signOut() {
+    localStorage.removeItem('token');
+    window.location.href = '/';
+  }
+  update(color: Color) {
     const topbar =
       this.elementRef.nativeElement.ownerDocument.querySelector('.topbar');
     const bottombar =
       this.elementRef.nativeElement.ownerDocument.querySelector('.bottombar');
     const body = this.elementRef.nativeElement.ownerDocument.body;
-    const rightbar=this.elementRef.nativeElement.ownerDocument.querySelector('.rightbar');
-   
-    data.afterClosed().subscribe((result) => {
-      if(result){
-        body.style.backgroundColor = result.value1;
-        // dialog.style.setProperty('background', result.value1, 'important');
-        topbar.style.backgroundColor = result.value1;
-        bottombar.style.backgroundColor = result.value2;
-        rightbar.style.backgroundColor = result.value3;
-        dialog.style.backgroundColor=result.value1
-      }
+    const rightbar =
+      this.elementRef.nativeElement.ownerDocument.querySelector('.rightbar');
+    topbar.style.backgroundColor = color.value1;
+    bottombar.style.backgroundColor = color.value2;
+    rightbar.style.backgroundColor = color.value3;
+    body.style.backgroundColor = color.value1;
+    this.themePicker.update({background:color.value3})
+  }
+
+  popUpDialog() {
+    this.themePicker.fire();
     
-     
-    });
   }
 }

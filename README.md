@@ -8,4 +8,5 @@ This project clone zingmp3.vn.
 #### Add/remove favorite song.
 #### History.
 #### Folowing singer
+#### Using slick-carousel, sweetalert
 

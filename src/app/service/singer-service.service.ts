@@ -16,7 +16,7 @@ export class SingerServiceService {
 
   getSingerInfo(name: string) {
     const param = new HttpParams().set('singerName', name);
-    return this.http.get<Singer>('http://localhost:3000/singer', {
+    return this.http.get<Singer>('https://music-jojojo13.herokuapp.com/singer', {
       headers: this.header,
       params: param,
     });
@@ -24,7 +24,7 @@ export class SingerServiceService {
 
   getSingerTopHit(singerName:string){
     const param = new HttpParams().set('singerName', singerName);
-    return this.http.get<Song>('http://localhost:3000/singerTopHit', {
+    return this.http.get<Song>('https://music-jojojo13.herokuapp.com/singerTopHit', {
       headers: this.header,
       params: param,
     });
@@ -32,14 +32,14 @@ export class SingerServiceService {
   }
   getSongOfSinger(singerName:string){
     const param = new HttpParams().set('singerName', singerName);
-    return this.http.get<Song[]>('http://localhost:3000/singerSong', {
+    return this.http.get<Song[]>('https://music-jojojo13.herokuapp.com/singerSong', {
       headers: this.header,
       params: param,
     });
   }
 
   getRandomSingers(){
-    return this.http.get<Singer[]>('http://localhost:3000/randomSinger', {
+    return this.http.get<Singer[]>('https://music-jojojo13.herokuapp.com/randomSinger', {
       headers: this.header   
     });
 

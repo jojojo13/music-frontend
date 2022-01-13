@@ -23,17 +23,17 @@ export class SongsServiceService {
   }
 
   getSongs() {
-    return this.http.get<Song[]>('http://localhost:3000/songs', {
+    return this.http.get<Song[]>('https://music-jojojo13.herokuapp.com/songs', {
       headers: this.header,
     });
   }
   getAllsong() {
-    return this.http.get<Song[]>('http://localhost:3000/allsongs', {
+    return this.http.get<Song[]>('https://music-jojojo13.herokuapp.com/allsongs', {
       headers: this.header,
     });
   }
    getAllSong() {
-    return this.http.get<Song[]>('http://localhost:3000/allsongs', {
+    return this.http.get<Song[]>('https://music-jojojo13.herokuapp.com/allsongs', {
       headers: this.header,
     });
   }
@@ -44,7 +44,7 @@ export class SongsServiceService {
   }
 
   getTopViewsSong() {
-    return this.http.get<Song[]>('http://localhost:3000/chart', {
+    return this.http.get<Song[]>('https://music-jojojo13.herokuapp.com/chart', {
       headers: this.header,
     });
   }

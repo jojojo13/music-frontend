@@ -32,52 +32,52 @@ export class UserServiceService {
   constructor(private http: HttpClient) {}
 
   getUser() {
-    return this.http.get<User>('http://localhost:3000/user', {
+    return this.http.get<User>('https://music-jojojo13.herokuapp.com/user', {
       headers: this.headers,
     });
   }
 
   getFavSongsOfUser() {
-    return this.http.get<Song[]>('http://localhost:3000/mymusic', {
+    return this.http.get<Song[]>('https://music-jojojo13.herokuapp.com/mymusic', {
       headers: this.headers,
     });
   }
 
   addUserFavoriteSongs(songID: string) {
     const data = { songID: songID };
-    return this.http.post('http://localhost:3000/addSong', data, {
+    return this.http.post('https://music-jojojo13.herokuapp.com/addSong', data, {
       headers: this.headers,
     });
   }
 
   getUserHistorySong() {
-    return this.http.get<Song[]>('http://localhost:3000/history', {
+    return this.http.get<Song[]>('https://music-jojojo13.herokuapp.com/history', {
       headers: this.headers,
     });
   }
 
   pushSongToUserHistory(songID: string) {
     const data = { songID: songID };
-    return this.http.post<string>('http://localhost:3000/history', data, {
+    return this.http.post<string>('https://music-jojojo13.herokuapp.com/history', data, {
       headers: this.headers,
     });
   }
 
   getUnfinishedSongOfUser() {
-    return this.http.get<Song>('http://localhost:3000/unfinishedSong', {
+    return this.http.get<Song>('https://music-jojojo13.herokuapp.com/unfinishedSong', {
       headers: this.headers,
     });
   }
 
   postUnfinishedSong(song: Song) {
     const object = { songID: song._id, timePaused: song.timePaused };
-    return this.http.post<Song>('http://localhost:3000/currentSong', object, {
+    return this.http.post<Song>('https://music-jojojo13.herokuapp.com/currentSong', object, {
       headers: this.headers,
     });
   }
   //get following singer
   getFollowingSinger() {
-    return this.http.get<Singer[]>('http://localhost:3000/getFollowingSinger', {
+    return this.http.get<Singer[]>('https://music-jojojo13.herokuapp.com/getFollowingSinger', {
       headers: this.headers,
     });
   }
@@ -86,7 +86,7 @@ export class UserServiceService {
 
   followSinger(singerID: string) {
     const data = { singerID: singerID };
-    return this.http.post('http://localhost:3000/followSinger', data, {
+    return this.http.post('https://music-jojojo13.herokuapp.com/followSinger', data, {
       headers: this.headers,
     });
   }

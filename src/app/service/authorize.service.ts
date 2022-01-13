@@ -10,7 +10,7 @@ export class AuthorizeService {
   constructor(private http: HttpClient) {}
   token=localStorage.getItem('token')
   login(data: Object) {
-    return this.http.post('http://localhost:3000/login', data);
+    return this.http.post('https://music-jojojo13.herokuapp.com/login', data);
   }
 
   isLogged = new BehaviorSubject<boolean>(false);
@@ -20,6 +20,6 @@ export class AuthorizeService {
   }
 
   createAccount(user:Object){
-    return this.http.post('http://localhost:3000/createAccount',user)
+    return this.http.post('https://music-jojojo13.herokuapp.com/createAccount',user)
   }
 }

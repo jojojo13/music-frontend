@@ -4,8 +4,7 @@
       <div class="imgBox">
         <img
           src="../../../assets/images/logo-dark.svg"
-          alt=""
-          
+          alt=""       
         />
       </div>
     </div>
@@ -18,11 +17,11 @@
         novalidate
       >
         <div class="form-group">
-          <input type="text" class="form-control" formControlName="username" placeholder="Username" />
+          <input type="text" class="form-control" formControlName="email" placeholder="Tên đăng nhập" />
           <small
             *ngIf="Username?.errors?.required && Username?.touched"
             class="error"
-            >User name is required</small
+            >Hãy nhập tên đăng nhập</small
           >
         </div>
         <div class="form-group">
@@ -30,18 +29,21 @@
             type="password"
             class="form-control"
             formControlName="password"
-            placeholder="Password"
+            placeholder="Mật khẩu"
           />
           <small
             *ngIf="Password?.errors?.required && Password?.touched"
             class="error"
-            >Password is required</small
+            >Hãy nhập mật khẩu</small
           >
         </div>
-        <button>LOGIN</button>
+        <div class="submit">
+          <button [disabled]="!loginForm.valid" class="btnSubmit">LOGIN</button>
+          <div class="loader "></div>
+        </div>       
         <small class="error" *ngIf="errorMessage">{{ errorMessage }}</small>
       </form>
-      <p class="forgot">Forgot password</p>
+      
       <p class="signup"><a routerLink='/signup'>Create Account?</a></p>
     </div>
   </div>

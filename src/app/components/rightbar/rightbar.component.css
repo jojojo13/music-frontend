@@ -16,6 +16,9 @@
   transform: translateX(260px);
   transition-duration: 1s;
 }
+.heading{
+  text-align: center;
+}
 .content {
   margin-left: 10px;
 }
@@ -59,7 +62,7 @@ p {
   visibility: visible;
   opacity: 1;
 }
-.imgBox:hover .animate {
+.imgBox:hover .barAnimate {
   visibility: hidden;
 }
 .overlay {
@@ -85,7 +88,7 @@ p {
   width: 2em;
   visibility: hidden;
 }
-.active {
+.barAnimate.active {
   visibility: visible;
 }
 

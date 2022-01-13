@@ -7,7 +7,7 @@
     </div>
     <div class="action">
       <app-add-fav-song [data]="song"></app-add-fav-song>
-      <!-- <i class="fas fa-heart" (click)="addFavorite()" [ngStyle]="{'color':song.isLiked==true?'red':'white'}"></i> -->
+
       <i class="fas fa-ellipsis-h"></i>
     </div>
   </div>
@@ -16,11 +16,11 @@
       <i class="fas fa-random"></i>
       <i class="fas fa-step-backward preBtn"></i>
       <i class="fas fa-play circle-icon playBtn"></i>
-      <i class="fas fa-pause pauseBtn "></i>
+      <i class="fas fa-pause pauseBtn"></i>
       <i class="fas fa-step-forward nextBtn"></i>
       <i class="fas fa-repeat"></i>
     </div>
-    <audio src=""></audio>
+    <audio src="" ></audio>
     <div class="duration">
       <span>{{ time | timeSong }}</span>
       <input

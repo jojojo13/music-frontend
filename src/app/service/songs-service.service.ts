@@ -9,7 +9,7 @@ import { Song } from '../components/music-for-you/music-for-you.component';
 export class SongsServiceService {
   header = new HttpHeaders({
     'Content-Type': 'application/json',
-    Accept: 'application/json',
+     'Accept': 'application/json',
   });
 
   currentSong!: Song;
@@ -19,7 +19,7 @@ export class SongsServiceService {
   listSongTracker = new BehaviorSubject<Song[]>(this.listSong);
 
   constructor(private http: HttpClient) {
-    this.g()
+  
   }
 
   getSongs() {
@@ -48,17 +48,6 @@ export class SongsServiceService {
       headers: this.header,
     });
   }
-  async g(){
-    const song=await this.getAllSong().toPromise()
-    this.listSong=song
-  }
 
-  getListSongbyIDs(ids: string[], songs: Song[]) {
-    let songArr: Song[] = [];
-    ids.forEach((id) => {
-      let object = songs.find((song) => song._id == id);
-      songArr.push(object as Song);
-    });
-    return songArr;
-  }
+
 }

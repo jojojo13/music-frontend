@@ -35,9 +35,9 @@ body {
   padding:18px;
   border-radius: 50%;
   border: none;
-  background-color: rgba(240, 240, 240, 0.2);
+  background-color: rgba(211, 209, 209, 0.2);
   cursor: pointer;
-  z-index: 2;
+  z-index: 1;
 }
 .slick-next {
   right: 0;

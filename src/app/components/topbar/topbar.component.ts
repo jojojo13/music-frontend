@@ -1,17 +1,15 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { AuthorizeService } from 'src/app/service/authorize.service';
 import { UserServiceService } from 'src/app/service/user-service.service';
 import { SwalPortalTargets } from '@sweetalert2/ngx-sweetalert2';
-import {
-  Color,
-  PopUpChangeBgColorComponent,
-} from '../pop-up-change-bg-color/pop-up-change-bg-color.component';
+import { Color } from '../pop-up-change-bg-color/pop-up-change-bg-color.component';
 export interface User {
-  username: '';
-  email: '';
-  img: '';
+  id:string,
+  username: string;
+  email: string;
+  img: string;
+  following:Array<string>
 }
 @Component({
   selector: 'app-topbar',
@@ -22,7 +20,6 @@ export class TopbarComponent implements OnInit {
   @ViewChild('themePicker') themePicker!: SwalComponent;
   constructor(
     private elementRef: ElementRef,
-    private dialogRef: MatDialog,
     private userService: UserServiceService,
     private auth: AuthorizeService,
     public readonly swalTargets: SwalPortalTargets
@@ -34,6 +31,8 @@ export class TopbarComponent implements OnInit {
     if (this.auth.token) {
       this.user = await this.userService.getUser().toPromise();
       this.img = this.user.img == '' ? this.img : this.user.img;
+     
+  
     }
   }
   signOut() {
@@ -52,11 +51,10 @@ export class TopbarComponent implements OnInit {
     bottombar.style.backgroundColor = color.value2;
     rightbar.style.backgroundColor = color.value3;
     body.style.backgroundColor = color.value1;
-    this.themePicker.update({background:color.value3})
+    this.themePicker.update({ background: color.value3 });
   }
 
   popUpDialog() {
     this.themePicker.fire();
-    
   }
 }

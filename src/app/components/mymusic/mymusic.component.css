@@ -16,7 +16,15 @@
 h2{
   margin-bottom: 8px;
 }
-
+.ele p{
+  font-weight: bolder;
+  color: gainsboro;
+  text-decoration: underline;
+}
+.ele p:hover{
+  color: aqua;
+  
+}
 .content:last-child {
   margin: 0;
 }

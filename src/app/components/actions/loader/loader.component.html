@@ -1,0 +1,5 @@
+<div class="loading" [ngStyle]="{'left.%':left,'top.%':top,'flex-direction':flexDirection}"  [class.done]="isLoaded">
+    <div class="loader"  [ngStyle]="{'width.px':width,'height.px':height}"></div>
+    <span *ngIf="textDisplay">Loading</span>
+</div>
+

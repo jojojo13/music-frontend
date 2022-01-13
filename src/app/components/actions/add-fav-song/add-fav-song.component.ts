@@ -27,19 +27,38 @@ export class AddFavSongComponent implements OnInit {
     private auth: AuthorizeService
   ) {}
 
-  ngOnInit(): void {}
-   addFavorite() {
-     //  if user logged in
+  ngOnInit(): void {
+    this.userService.isFavoriteLoadedDone.subscribe((isDone) => {
+      
+      if (isDone) {
+        const favSong = this.userService.yeuthich;
+
+        const index = favSong.findIndex(
+          (favSong) => favSong._id == this.song._id
+        );
+        if (index > -1) {
+          this.song.isLiked = true;
+        } else {
+          this.song.isLiked = false;
+        }
+      }
+    });
+  }
+  addFavorite() {
+    //  if user logged in
     if (this.auth.token != null) {
       // add favor song
-       this.userService.addUserFavoriteSongs(this.song._id).toPromise().then(async()=>{
-         //get user favorite song
-        const favorSong=await this.userService.getFavSongsOfUser().toPromise()
-        // pass  to userFavoriteSongChange to component [mymusic] subcribe
-        this.userService.userFavoriteSongChange.next(favorSong)
-       })
-  
-      this.song.isLiked = !this.song.isLiked;
+      this.userService
+        .addUserFavoriteSongs(this.song._id)
+        .toPromise()
+        .then(() => {
+          //get user favorite song
+
+          // pass  to userFavoriteChange to other component detect change
+          this.userService.userFavoriteChange.next(true);
+        });
+
+      // this.song.isLiked = !this.song.isLiked;
       // popup login if not logged
     } else {
       window.open('/login', 'Popup', 'width=600,height=600');

@@ -15,7 +15,7 @@ import { PopUpChangeBgColorComponent } from './components/pop-up-change-bg-color
 import { BottomBarComponent } from './components/bottom-bar/bottom-bar.component';
 import { OptionsComponent } from './components/options/options.component';
 import { MymusicComponent } from './components/mymusic/mymusic.component'
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MusicAppComponent } from './components/music-app/music-app.component';
 import { GuardGuard } from './service/guard.guard';
 import { TimeSongPipe } from './pipes/time-song.pipe';
@@ -29,6 +29,10 @@ import { SignupComponent } from './components/signup/signup.component';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations'
 import { SweetAlert2Module } from "@sweetalert2/ngx-sweetalert2";
+import { LoaderComponent } from './components/actions/loader/loader.component';
+import { SingerDetailComponent } from './components/singer-detail/singer-detail.component';
+import { FollowBtnComponent } from './components/actions/follow-btn/follow-btn.component';
+import { SingerFollowComponent } from './singer-follow/singer-follow.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,7 +55,12 @@ import { SweetAlert2Module } from "@sweetalert2/ngx-sweetalert2";
     ChartComponent,
     RightbarComponent,
     FamousSongComponent,
-    SignupComponent
+    SignupComponent,
+    LoaderComponent,
+    SingerDetailComponent,
+    FollowBtnComponent,
+    SingerFollowComponent
+
   ],
   imports: [
     BrowserModule,
@@ -61,7 +70,8 @@ import { SweetAlert2Module } from "@sweetalert2/ngx-sweetalert2";
     ReactiveFormsModule,
     SlickCarouselModule,
     NoopAnimationsModule,
-    SweetAlert2Module.forRoot()
+    SweetAlert2Module.forRoot(),
+    FormsModule
   ],
   providers: [  {
     provide: MatDialogRef,

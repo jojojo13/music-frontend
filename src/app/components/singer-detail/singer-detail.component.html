@@ -1,0 +1,49 @@
+<app-loader #loadingBar></app-loader>
+<div class="content">
+  <div class="intro">
+    <div class="description">
+      <h1>{{ singer.name | uppercase }}</h1>
+      <p>
+        {{ singer.description }}
+      </p>
+      <div class="followers">
+        <button><i class="fas fa-play"></i>PHÁT NHẠC</button>
+        <app-follow-btn #followBtn (click)="follow()"></app-follow-btn>
+
+        <p>{{ singer.follow | number }} QUAN TÂM</p>
+        <div class="loadingFollow">
+          <app-loader
+            #loadingOnChange
+            [width]="20"
+            [height]="20"
+            [left]="36"
+            [textDisplay]="true"
+            [flexDirection]="'row'"
+          ></app-loader>
+        </div>
+      </div>
+
+      <div class="hot">
+        <div class="imgBox">
+          <div class="overlay">
+            <app-change-current-song
+              [data]="top1Song"
+            ></app-change-current-song>
+          </div>
+          <img [src]="top1Song.img" alt="" />
+        </div>
+        <div class="notes">
+          <small>Nghe nhiều nhất</small>
+          <p>{{ top1Song.name }}</p>
+          <small class="date">12/12/2020</small>
+        </div>
+      </div>
+    </div>
+    <div class="singerImg">
+      <div class="imgBox">
+        <img [src]="singer.img" alt="" />
+      </div>
+    </div>
+  </div>
+</div>
+<app-music-for-you #suggestedSongs></app-music-for-you>

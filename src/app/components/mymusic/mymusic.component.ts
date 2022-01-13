@@ -7,26 +7,20 @@ import { Song } from '../music-for-you/music-for-you.component';
   templateUrl: './mymusic.component.html',
   styleUrls: ['./mymusic.component.css']
 })
-export class MymusicComponent implements OnInit,OnDestroy {
-
+export class MymusicComponent implements OnInit {
+  title='Bài hát yêu thích'
   myFavoriteSongs!:Song[]
+  isLoaded=false
   constructor(private userService:UserServiceService) { 
   
   }
 
   ngOnInit() {
-    this.userService.userFavoriteSongChange.subscribe((songs:Song[]) =>{
-        songs.forEach(song=>{
-          song['isLiked']=true
-        })
-       
-        this.myFavoriteSongs=songs
-      
-    
-    })
+   this.userService.favoriteSong.subscribe(favSong=>{
+     this.myFavoriteSongs=favSong
+      this.isLoaded=true
+   })
   }
-  ngOnDestroy():void{
-    console.log('destroy')
-  }
+ 
   
 }

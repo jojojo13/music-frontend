@@ -21,6 +21,7 @@ p {
   display: flex;
   align-items: center;
   min-width: 295px;
+  width: 25%;
 }
 .right {
   display: flex;
@@ -60,7 +61,7 @@ p {
 .fa-heart::before {
 }
 .musicList {
-  padding: 12px;
+  padding: 16px;
   background-color: rgba(241, 233, 233, 0.2);
   border-radius: 5px;
   margin: 0;
@@ -91,11 +92,11 @@ p {
 }
 .circle-icon {
   border: 1px solid #fff;
-  padding: 12px 12px 12px 14px;
+  padding: 12px 12px 12px 12px;
   border-radius: 50%;
 }
 .pauseBtn{
-  padding: 12px 12px 12px 14px;
+  padding: 12px 12px 12px 12px;
   border: 1px solid #fff;
   border-radius: 50%;
   position: absolute;
@@ -115,6 +116,9 @@ p {
 span {
   margin: 0 10px;
 }
+.preBtn,.pauseBtn,.playBtn,.nextBtn{
+  cursor: pointer;
+}
 
 @keyframes spin {
   from {
@@ -129,9 +133,11 @@ span {
     opacity: 1;
   }
   50% {
+    background-color: red;
     opacity: 0.2;
   }
   100% {
+    background: none;
     opacity: 1;
   }
 }

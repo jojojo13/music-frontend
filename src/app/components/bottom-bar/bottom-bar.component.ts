@@ -5,6 +5,7 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
+import { AuthorizeService } from 'src/app/service/authorize.service';
 
 import { SongsServiceService } from 'src/app/service/songs-service.service';
 import { UserServiceService } from 'src/app/service/user-service.service';
@@ -34,15 +35,15 @@ export class BottomBarComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private elementRef: ElementRef,
     private songservice: SongsServiceService,
-    private userService: UserServiceService
+    private userService: UserServiceService,
+    private auth: AuthorizeService
   ) {}
   ngOnDestroy(): void {}
 
   async ngOnInit() {
     let index = 0;
     //get token
-    const token=localStorage.getItem('token')
-    
+
     //get audio
     const audio: HTMLAudioElement =
       this.elementRef.nativeElement.ownerDocument.querySelector('audio');
@@ -56,11 +57,8 @@ export class BottomBarComponent implements OnInit, AfterViewInit, OnDestroy {
     //get cd to make animate
     const disk: HTMLElement =
       this.elementRef.nativeElement.ownerDocument.querySelector('.cd');
-    //get bar animate
-    const barAnimate: HTMLElement =
-      this.elementRef.nativeElement.ownerDocument.querySelector(
-        '.barAnimate .active'
-      );
+
+
     // get play btn
     const playBtn: HTMLAudioElement =
       this.elementRef.nativeElement.ownerDocument.querySelector('.playBtn');
@@ -75,8 +73,7 @@ export class BottomBarComponent implements OnInit, AfterViewInit, OnDestroy {
       this.elementRef.nativeElement.ownerDocument.querySelector('.pauseBtn');
     let unfinishedSong: any;
     //load unfinished song of user in last access website
-    if (token) {
-     
+    if (this.auth.token) {
       unfinishedSong = await this.userService
         .getUnfinishedSongOfUser()
         .toPromise();
@@ -86,9 +83,7 @@ export class BottomBarComponent implements OnInit, AfterViewInit, OnDestroy {
       init: () => {
         // currentSong= unfinishedSong
         if (unfinishedSong) {
-        
-            this.songservice.currentSongChange.next(unfinishedSong);
-          
+          this.songservice.currentSongChange.next(unfinishedSong);
         }
         this.songservice.currentSongChange.subscribe(
           (currentSongPlay: Song) => {
@@ -112,33 +107,31 @@ export class BottomBarComponent implements OnInit, AfterViewInit, OnDestroy {
       handleEvents: () => {
         //pause or play audio
         playBtn.onclick = () => {
-        
-            audio.play();
-          
+          audio.play();
         };
-        pauseBtn.onclick=()=>{
-          audio.pause()
-        }
+        pauseBtn.onclick = () => {
+          audio.pause();
+        };
         //play animation when audio play
         audio.onplay = () => {
           this.isPlaying = true;
           disk.style.animationPlayState = 'running';
-          pauseBtn.style.visibility='visible'
-          playBtn.style.visibility='hidden'
+          pauseBtn.style.visibility = 'visible';
+          playBtn.style.visibility = 'hidden';
         };
         //paused animation when audio paused
         audio.onpause = () => {
           this.isPlaying = false;
           disk.style.animationPlayState = 'paused';
-          playBtn.style.visibility='visible'
-          pauseBtn.style.visibility='hidden'
+          playBtn.style.visibility = 'visible';
+          pauseBtn.style.visibility = 'hidden';
+          
           //assign timePaused  to object this.song
-          this.song.timePaused =Math.round(audio.currentTime) ;
+          this.song.timePaused = Math.round(audio.currentTime);
           //post to server
-          if(token){
+          if (this.auth.token) {
             this.userService.postUnfinishedSong(this.song).toPromise();
           }
-         
         };
 
         //update duration song
@@ -173,30 +166,34 @@ export class BottomBarComponent implements OnInit, AfterViewInit, OnDestroy {
         };
         //next song in history
         nextBtn.onclick = () => {
-          if (index == this.userService.historySongArr.length - 1) {
-            index = 0;
-          } else {
-            index++;
-          }
+          this.userService.historySongs.subscribe((songs) => {
+            if (index == songs.length - 1) {
+              index = 0;
+            } else {
+              index++;
+            }
+          });
           music.loadCurrentSong();
         };
         //previous song in history
         preBtn.onclick = () => {
-          if (index == 0) {
-            index = this.userService.historySongArr.length - 1;
-          } else {
-            index--;
-          }
+          this.userService.historySongs.subscribe((songs) => {
+            if (index == 0) {
+              index = songs.length - 1;
+            } else {
+              index--;
+            }
+          });
           music.loadCurrentSong();
         };
 
         // post current song to server if song not completed before window closed
-        if (token) {
+        if (this.auth.token) {
           window.onbeforeunload = (event) => {
             // if close widow when audio playing
             if (this.isPlaying == true) {
               //assign timePaused  to object this.song
-              this.song.timePaused =Math.round(audio.currentTime) ;
+              this.song.timePaused = Math.round(audio.currentTime);
               //post to server
               this.userService.postUnfinishedSong(this.song).toPromise();
               //confirm dialog to close or not
@@ -207,9 +204,11 @@ export class BottomBarComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       },
       loadCurrentSong: () => {
-        let listSong = this.userService.historySongArr;
-        this.song = listSong[index];
-        this.songservice.currentSongChange.next(this.song);
+        this.userService.historySongs.subscribe((songs) => {
+          let listSong = songs;
+          this.song = listSong[index];
+          this.songservice.currentSongChange.next(this.song);
+        });
       },
 
       setIndexCurrentSong: () => {
@@ -231,10 +230,6 @@ export class BottomBarComponent implements OnInit, AfterViewInit, OnDestroy {
     };
     music.start();
   }
-  // processFavSong(){
-  //   this.userService.getFavSongsOfUser().subscribe(favoriteSongs=>{
-  //     this.songservice.
-  //   })
-  // }
+
   ngAfterViewInit(): void {}
 }

@@ -1,0 +1,42 @@
+*{
+    margin: 0;
+    padding:0;
+    box-sizing: border-box;
+}
+.list{
+    display: flex;
+    flex-wrap: wrap;
+}
+.singer{
+    width: 25%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    align-items: center;
+  
+}
+.imgBox{
+    height: 200px;
+    width: 200px;
+
+}
+.imgBox img{
+    border-radius: 50%;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+.info{
+    margin-top: 10px;
+}
+.info p{
+    color: rgb(172, 170, 170);
+}
+h3{
+    margin: 0;
+    text-decoration: underline;
+}
+h3:hover{
+    color: dodgerblue;
+}

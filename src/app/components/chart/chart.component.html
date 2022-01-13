@@ -5,20 +5,18 @@
       <div class="rank">
         <h3 class="effect">{{ i + 1 }}</h3>
       </div>
-     
+
       <i class="far fa-window-minimize"></i>
       <div class="imgBox">
         <div class="overlay">
-          <app-change-current-song
-            [data]="song"
-          ></app-change-current-song>
+          <app-change-current-song [data]="song"></app-change-current-song>
         </div>
 
         <img [src]="song.img" alt="anh nay bi loi" />
       </div>
       <div class="description">
         <h4>{{ song.name }}</h4>
-        <p>{{ song.singer }}</p>
+        <p [routerLink]="['/singer',song.singer]">{{ song.singer }}</p>
       </div>
       <div class="action">
         <app-add-fav-song [data]="song"></app-add-fav-song>
@@ -26,3 +24,4 @@
     </div>
   </div>
 </div>
+<app-loader [isLoaded]="isLoadedDone"></app-loader>

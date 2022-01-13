@@ -1,0 +1,16 @@
+<div>
+    <h2>Ca sĩ cho bạn</h2>
+    <div class="list">
+
+        <div class="singer" *ngFor="let singer of listSinger">
+            <div class="imgBox">
+                <img [src]="singer.img" alt="">
+            </div>
+            <div class="info">
+                <h3 [routerLink]="['/singer',singer.name]">{{singer.name|uppercase}}</h3>
+                <p>{{singer.follow}} quan tâm</p>
+    
+            </div>
+        </div>
+    </div>
+</div>

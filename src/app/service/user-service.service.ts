@@ -3,16 +3,26 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Song } from '../components/music-for-you/music-for-you.component';
 import { User } from '../components/topbar/topbar.component';
+import { Singer } from '../interfaces/singer';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserServiceService {
-  userFavoriteSongs: Song[] = [];
-  userFavoriteSongChange = new BehaviorSubject<any>(this.userFavoriteSongs);
+  song!: Song[];
+  userFollowing!: [];
 
   historySongArr!: Song[];
   historySong = new BehaviorSubject<Song[]>(this.historySongArr);
+
+  userFavoriteChange = new BehaviorSubject<boolean>(false);
+  userHistoryChange = new BehaviorSubject<boolean>(false);
+  isFavoriteLoadedDone = new BehaviorSubject<boolean>(false);
+
+  songForYou = new BehaviorSubject<Song[]>(this.song);
+  favoriteSong = new BehaviorSubject<Song[]>(this.song);
+  historySongs = new BehaviorSubject<Song[]>(this.song);
+  yeuthich!: Song[];
 
   headers: HttpHeaders = new HttpHeaders({
     'Content-Type': 'application/json',
@@ -21,7 +31,7 @@ export class UserServiceService {
 
   constructor(private http: HttpClient) {}
 
-  getUser(){
+  getUser() {
     return this.http.get<User>('http://localhost:3000/user', {
       headers: this.headers,
     });
@@ -41,13 +51,14 @@ export class UserServiceService {
   }
 
   getUserHistorySong() {
-    return this.http.get<string[]>('http://localhost:3000/history', {
+    return this.http.get<Song[]>('http://localhost:3000/history', {
       headers: this.headers,
     });
   }
+
   pushSongToUserHistory(songID: string) {
     const data = { songID: songID };
-    return this.http.post<string[]>('http://localhost:3000/history', data, {
+    return this.http.post<string>('http://localhost:3000/history', data, {
       headers: this.headers,
     });
   }
@@ -64,32 +75,19 @@ export class UserServiceService {
       headers: this.headers,
     });
   }
-
-  // find index common between user's favorite songs and list of songs
-  findIndexCommon(a1: Song[], a2: Song[]) {
-    let arrInd = [];
-
-    for (let i = 0; i < a1.length; i++) {
-      for (let j = 0; j < a2.length; j++) {
-        if (a2[j]._id == a1[i]._id) {
-          arrInd.push(i);
-        }
-      }
-    }
-    return arrInd;
-  }
-
-  addIsLikedKeyToSong(indexArr: number[], song: Song[]) {
-    const newKey: keyof Song = 'isLiked';
-
-    //remove song.isLiked
-    song.forEach((song) => {
-      song[newKey] = false;
-    });
-
-    indexArr.map((item: number) => {
-      song[item][newKey] = true;
+  //get following singer
+  getFollowingSinger() {
+    return this.http.get<Singer[]>('http://localhost:3000/getFollowingSinger', {
+      headers: this.headers,
     });
   }
 
+  //follow singer
+
+  followSinger(singerID: string) {
+    const data = { singerID: singerID };
+    return this.http.post('http://localhost:3000/followSinger', data, {
+      headers: this.headers,
+    });
+  }
 }

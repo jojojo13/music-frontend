@@ -1,0 +1,14 @@
+<div>
+
+  <button *ngIf="!isFollowed">
+    <div class="content" *ngIf="showIcon">
+      <i  class="fas fa-user-plus"></i>QUAN TÂM
+    </div>
+  </button>
+  <button class="isFollowed" *ngIf="isFollowed" >
+    <div class="content" *ngIf="showIcon">
+      <i  class="fas fa-check"></i>ĐÃ QUAN TÂM
+    </div>
+   
+  </button>
+</div>

@@ -1,0 +1,33 @@
+.loading{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    gap: 10px;
+}
+
+.loader {
+  border-radius: 50%;
+  border: 3px solid rgb(184, 181, 181);
+  border-top-color: rgb(53, 21, 53);
+  animation: spinner 2s linear infinite;
+}
+.loading.done{
+    display: none;
+}
+span{
+    font-weight: bolder;
+    color: rgb(235, 229, 229);
+    font-size: 16px;
+    
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

@@ -9,7 +9,7 @@
     width: 130px;
     left: 50%;
     transform: translate(-50%,-50%);
-    z-index: 5;
+    z-index: 2;
 }
 .circle-icon {
     border:1px solid #fff;

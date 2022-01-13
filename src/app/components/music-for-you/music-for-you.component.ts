@@ -11,8 +11,7 @@ export interface Song {
   likes: number;
   dislikes: number;
   link: string;
-  [key:string]:any
-
+  [key: string]: any;
 }
 
 @Component({
@@ -20,23 +19,20 @@ export interface Song {
   templateUrl: './music-for-you.component.html',
   styleUrls: ['./music-for-you.component.css'],
 })
-export class MusicForYouComponent implements OnInit,AfterViewInit {
+export class MusicForYouComponent implements OnInit, AfterViewInit {
+  title='Dành cho bạn'
   songs!: Song[];
-
+  isLoaded=false
   constructor(
     private songService: SongsServiceService,
     private userService: UserServiceService
   ) {}
 
-  ngOnInit(): void {
-    this.songService.listSongTracker.subscribe(songs=>{
-      this.songs=songs     
-    })
-   
+  ngOnInit() {
+    this.userService.songForYou.subscribe((songs) => {
+      this.songs = songs;
+      this.isLoaded=true
+    });
   }
-  ngAfterViewInit():void {
- 
-  }
-
-
+  ngAfterViewInit(): void {}
 }

@@ -59,6 +59,11 @@ button {
   border: 0;
  
 }
+button[disabled]{
+  cursor: not-allowed;
+  background-color: #cccccc;
+  color: #666666;
+}
 .signup a {
   text-align: center;
   color: rgb(218, 214, 214);
@@ -72,7 +77,34 @@ button {
   color: rgb(247, 35, 35);
   font-weight: 900;
 }
-
+.submit{
+  position: relative;;
+}
+.loader {
+  position: absolute;
+  border: 3px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 3px solid rgb(49, 5, 68) ;
+  width: 20px;
+  height: 20px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 1s linear infinite;
+  top: 20%;
+  left: 35%;
+  
+  opacity: 0;
+}
+ .loader.active{
+  opacity: 1;
+}
+@keyframes spin {
+  0%{
+    transform: rotate(0);
+    }
+    100%{
+      transform: rotate(360deg);
+    }
+}
 @media screen and (min-width:768px) {
   .main{
    max-width: 360px;

@@ -7,24 +7,20 @@ import { Song } from '../music-for-you/music-for-you.component';
 @Component({
   selector: 'app-chart',
   templateUrl: './chart.component.html',
-  styleUrls: ['./chart.component.css']
+  styleUrls: ['./chart.component.css'],
 })
 export class ChartComponent implements OnInit {
-  topSongs!:Song[]
-  constructor(private songService:SongsServiceService,  private userService: UserServiceService,private auth:AuthorizeService) { }
+  topSongs!: Song[];
+  isLoadedDone=false
+  constructor(
+    private songService: SongsServiceService,
+
+  ) {}
 
   ngOnInit(): void {
-    
-        this.songService.getTopViewsSong().subscribe(async (topSongs:Song[])=>{
-        this.topSongs=await topSongs
-      
-        this.userService.userFavoriteSongChange.pipe().subscribe((favSongs:Song[]) => { 
-          let indexOfCommon = this.userService.findIndexCommon(topSongs, favSongs);    
-          this.userService.addIsLikedKeyToSong(indexOfCommon,topSongs)   
-        });
-       })
-    }
-    
+    this.songService.getTopViewsSong().subscribe((topSongs: Song[]) => {
+      this.topSongs = topSongs;
+      this.isLoadedDone=true
+    });
   }
-
-
+}

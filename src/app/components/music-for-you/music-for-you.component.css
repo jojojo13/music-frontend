@@ -66,6 +66,15 @@ img {
     z-index: 3;
     border-radius: 50%;
 }
+.ele p{
+  font-weight: bolder;
+  color: gainsboro;
+  text-decoration: underline;
+}
+.ele p:hover{
+  color: aqua;
+  
+}
 @keyframes moveToCorner {
   0%{
     

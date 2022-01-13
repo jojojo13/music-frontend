@@ -9,6 +9,7 @@ import { Song } from '../music-for-you/music-for-you.component';
 })
 export class FamousSongComponent implements OnInit {
   famousSongs!: Song[];
+  isLoaded=false
   slideConfig = {
     slidesToShow: 3,
     slidesToScroll: 2,
@@ -17,7 +18,6 @@ export class FamousSongComponent implements OnInit {
     autoplaySpeed: 2000,
     prevArrow:'<button type="button" class="slick-prev"><i class="fas fa-chevron-left "></i></button>',
     nextArrow:'<button type="button" class="slick-next"><i class="fas fa-chevron-right "></i></button>'
-
   };
   constructor(private songService: SongsServiceService) {}
 
@@ -25,6 +25,6 @@ export class FamousSongComponent implements OnInit {
   
       //get list song
       this.famousSongs= await this.songService.getAllSong().toPromise()
-
+      this.isLoaded=true
   }
 }

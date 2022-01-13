@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthorizeService } from 'src/app/service/authorize.service';
 import { SongsServiceService } from 'src/app/service/songs-service.service';
 import { UserServiceService } from 'src/app/service/user-service.service';
-import { Song } from '../music-for-you/music-for-you.component';
+
 
 @Component({
   selector: 'app-music-app',
@@ -20,49 +20,51 @@ export class MusicAppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.renderSongs();
-    this.getHistorySong();
+    this.getSongForYou();
+    this.getSongFavorite();
+    this.getHistory();
   }
 
-  async getHistorySong() {
-    //get all song
-    const allSong = await this.songService.getAllSong().toPromise();
-    //get array songID of song was listened by user
+  getSongForYou() {
+    this.songService
+      .getSongs()
+      .toPromise()
+      .then((songs) => {
+        this.userService.songForYou.next(songs);
+      });
+  }
 
+  getSongFavorite() {
+    //get favorite song if logged
     if (this.auth.token != null) {
-      const historySongIDs = await this.userService
-        .getUserHistorySong()
-        .toPromise();
-      //if user logged in
-      // filter to get songs was listened by user
-      this.userService.historySongArr = this.songService.getListSongbyIDs(
-        historySongIDs,
-        allSong
-      );
-      // bind to BehaviorSubject historySong to detect change
-      this.userService.historySong.next(this.userService.historySongArr);
+      //recall api if user add/remove favorite song
+      this.userService.userFavoriteChange.subscribe((isChange) => {
+        this.userService
+          .getFavSongsOfUser()
+          .toPromise()
+          .then((favSongs) => {
+            this.userService.favoriteSong.next(favSongs);
+            this.userService.yeuthich = favSongs;
+            this.userService.isFavoriteLoadedDone.next(true);
+          });
+      });
     }
   }
 
-  async renderSongs() {
-    // this.songService.listSong = await this.songService.getAllSong().toPromise();
-    //get songForYou to pass music-for-you component
-    const songForyou = await this.songService.getSongs().toPromise();
-    // make heart icon color to red corresponding user's song liked if logged
+  getHistory() {
+    //get history songs if logged
     if (this.auth.token != null) {
-      this.processSongUserLiked(songForyou);
+      // recall api to load history if user listen new song
+      this.userService.userHistoryChange.subscribe((isChange) => {
+        // load history song from server
+        this.userService
+          .getUserHistorySong()
+          .toPromise()
+          .then((songs) => {
+            // bind
+            this.userService.historySongs.next(songs);
+          });
+      });
     }
-    this.songService.listSongTracker.next(songForyou);
-  }
-
-  async processSongUserLiked(allSong: any) {
-    //get user favorite song
-    const favSongs = await this.userService.getFavSongsOfUser().toPromise();
-    this.userService.userFavoriteSongChange.next(favSongs);
-    // make heart icon color to red corresponding user's song liked
-    this.userService.userFavoriteSongChange.pipe().subscribe((favSongs) => {
-      let indexOfCommon = this.userService.findIndexCommon(allSong, favSongs);
-      this.userService.addIsLikedKeyToSong(indexOfCommon, allSong);
-    });
   }
 }

@@ -1,14 +1,24 @@
 <div class="rightbar">
   <div class="heading">
-    <h3>Right bar</h3>
+    <h3>Lịch sử nghe</h3>
   </div>
   <div class="list">
-    <div class="song" *ngFor="let song of historySong;let i=index"  [class.playing]="i==indexSongPlaying">
+    <div
+      class="song"
+      *ngFor="let song of historySongs; let i = index"
+      [class.playing]="i == indexSongPlaying"
+    >
       <div class="imgBox">
         <div class="overlay">
-          <app-change-current-song class="playBtn" [data]="song"></app-change-current-song>
-          
-          <div class="barAnimate " [class.active]="i==indexSongPlaying">
+          <app-change-current-song
+            class="playBtn"
+            [data]="song"
+          ></app-change-current-song>
+          <app-add-fav-song
+            [data]="song"
+            [style.display]="'none'"
+          ></app-add-fav-song>
+          <div class="barAnimate" [class.active]="i == indexSongPlaying">
             <span></span>
             <span></span>
             <span></span>
@@ -21,7 +31,6 @@
         <h3>{{ song.name }}</h3>
         <p>{{ song.singer }}</p>
       </div>
-     
     </div>
   </div>
 </div>

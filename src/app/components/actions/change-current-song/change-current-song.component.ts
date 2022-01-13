@@ -43,24 +43,14 @@ export class ChangeCurrentSongComponent implements OnInit {
     // pass Song selected to bottom bar to play
     this.songService.bindSongDataToPlay(this.song);
     if (localStorage.getItem('token')) {
-      // this.songService.updateHistory(this.song._id)
-      this.songService.getAllsong().subscribe((songs) => {
-        // send current songID to server
-        this.userService.pushSongToUserHistory(this.song._id).subscribe(
-          //server response songID listened array
-          (ids) => {
-            //historySongArr by filter songID listened in songs
-            this.userService.historySongArr = this.songService.getListSongbyIDs(
-              ids,
-              songs
-            );
-            //update history song when listen new song
-            this.userService.historySong.next(
-              this.songService.getListSongbyIDs(ids, songs)
-            );
-          }
-        );
-      });
+      // send current songID to server
+      this.userService
+        .pushSongToUserHistory(this.song._id)
+       
+        .subscribe(() => {
+          //make change notice for other component to recall api
+          this.userService.userHistoryChange.next(true);
+        });
     }
   }
 }

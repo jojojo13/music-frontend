@@ -32,52 +32,52 @@ export class UserServiceService {
   constructor(private http: HttpClient) {}
 
   getUser() {
-    return this.http.get<User>('https://jojojomusic.up.railway.app/user', {
+    return this.http.get<User>('https://music-jojojo13.herokuapp.com/user', {
       headers: this.headers,
     });
   }
 
   getFavSongsOfUser() {
-    return this.http.get<Song[]>('https://jojojomusic.up.railway.app/mymusic', {
+    return this.http.get<Song[]>('https://music-jojojo13.herokuapp.com/mymusic', {
       headers: this.headers,
     });
   }
 
   addUserFavoriteSongs(songID: string) {
     const data = { songID: songID };
-    return this.http.post('https://jojojomusic.up.railway.app/addSong', data, {
+    return this.http.post('https://music-jojojo13.herokuapp.com/addSong', data, {
       headers: this.headers,
     });
   }
 
   getUserHistorySong() {
-    return this.http.get<Song[]>('https://jojojomusic.up.railway.app/history', {
+    return this.http.get<Song[]>('https://music-jojojo13.herokuapp.com/history', {
       headers: this.headers,
     });
   }
 
   pushSongToUserHistory(songID: string) {
     const data = { songID: songID };
-    return this.http.post<string>('https://jojojomusic.up.railway.app/history', data, {
+    return this.http.post<string>('https://music-jojojo13.herokuapp.com/history', data, {
       headers: this.headers,
     });
   }
 
   getUnfinishedSongOfUser() {
-    return this.http.get<Song>('https://jojojomusic.up.railway.app/unfinishedSong', {
+    return this.http.get<Song>('https://music-jojojo13.herokuapp.com/unfinishedSong', {
       headers: this.headers,
     });
   }
 
   postUnfinishedSong(song: Song) {
     const object = { songID: song._id, timePaused: song.timePaused };
-    return this.http.post<Song>('https://jojojomusic.up.railway.app/currentSong', object, {
+    return this.http.post<Song>('https://music-jojojo13.herokuapp.com/currentSong', object, {
       headers: this.headers,
     });
   }
   //get following singer
   getFollowingSinger() {
-    return this.http.get<Singer[]>('https://jojojomusic.up.railway.app/getFollowingSinger', {
+    return this.http.get<Singer[]>('https://music-jojojo13.herokuapp.com/getFollowingSinger', {
       headers: this.headers,
     });
   }
@@ -86,7 +86,7 @@ export class UserServiceService {
 
   followSinger(singerID: string) {
     const data = { singerID: singerID };
-    return this.http.post('https://jojojomusic.up.railway.app/followSinger', data, {
+    return this.http.post('https://music-jojojo13.herokuapp.com/followSinger', data, {
       headers: this.headers,
     });
   }

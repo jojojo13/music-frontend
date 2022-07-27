@@ -59,7 +59,7 @@ export class PopUpChangeBgColorComponent implements OnInit {
 
   ];
   colorChoosed: any;
-  constructor(public dialogRef: MatDialogRef<PopUpChangeBgColorComponent>, private elementRef: ElementRef,) {}
+  constructor(   private elementRef: ElementRef,) {}
 
   ngOnInit(): void {}
   choose(color: any) {  
